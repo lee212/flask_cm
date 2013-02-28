@@ -2,9 +2,9 @@
 from flask import Flask, render_template
 from flask_flatpages import FlatPages
 #import cloud_mesh as fg
-from cloudmesh import cloud_mesh
+from cloudmesh.cloudmesh import cloudmesh
 from datetime import datetime
-from sh import cm 
+from cloudmesh.cloudmesh import cloudmesh
 
 DEBUG = True
 FLATPAGES_AUTO_RELOAD = DEBUG
@@ -18,9 +18,9 @@ app.config.from_object(__name__)
 pages = FlatPages(app)
 
 #clouds = fg.cloud_mesh()
-clouds = cloud_mesh.cloud_mesh()
+clouds = cloudmesh()
 clouds.load()
-clouds.refresh()
+#clouds.refresh_servers()
 
 def make_active(name):
   active = {'home' : "", 
@@ -44,10 +44,11 @@ def index():
 def refresh(cloud=None, server=None):
   print "-> refresh", cloud, server
   global clouds
-  clouds.refresh()
+  #clouds.refresh_servers()
   clouds.save()
   return table()
 
+'''
 @app.route('/cm/kill/')
 def kill_vms():
   print "-> kill all"
@@ -68,7 +69,7 @@ def start_vm(cloud=None, server=None):
   if (cloud == 'india'):
     r = cm("--set", "quiet", "start:1", _tty_in=True)
   return table()
-
+'''
 #gregorss test 
 @app.route('/cm/metric/<startdate>/<enddate>/<host>')
 def list_metric(cloud=None, server=None):
