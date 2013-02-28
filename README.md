@@ -4,6 +4,7 @@ Package requirements
 * sh
 * blessings
 * Flask-FlatPages
+* pyaml
 
 directory organization
 ----------------------
